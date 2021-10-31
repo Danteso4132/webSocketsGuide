@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}"/>
+    <script type="text/javascript" th:src="@{/scripts/script.js}"></script>
+</head>
+<body>
+<p th:text="'All theatres:' + ${allTheatres}" />
+
+<br>
+<h1>All theatres:</h1>
+<table class="list-of-theatres">
+    <tr th:each="theatre : ${parsedJSON}">
+        <td><span th:text="${theatre.id}"> Id</span></td>
+        <td><span th:text="${theatre.name}"> Name </span></td>
+        <td><span th:text="${theatre.address}"> Address </span></td>
+    </tr>
+</table>
+<h2>Carefully Styled Heading</h2>
+<p>
+    This is info after <strong>table</strong> styling.
+</p>
+<button th:onclick="goBack()">Go back to main!</button>
+</body>
+</html>
