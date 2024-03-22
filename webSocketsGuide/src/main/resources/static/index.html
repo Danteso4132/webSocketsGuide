@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<style>
+    body {
+        background: darkgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 800px;
+        height: 800px;
+        display: grid;
+        grid-template-columns: repeat(50, 1fr);
+        grid-template-rows: repeat(50, 1fr);
+    }
+
+    .block {
+        /*background-color: #aaa;*/
+        /*border: 1px solid #fff;*/
+        border: 1px solid grey;
+        user-select: none;
+    }
+
+    .buttons {
+        margin-top: 2px;
+    }
+</style>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+
+</div-->
+<div class="container" id="container"></div>
+<div class="buttons">
+    <button id="enableSandBtn" style="background: chocolate">Sand</button>
+    <button id="enableStoneBtn" style="background: #808080">Stone</button>
+    <button id="enableWaterBtn" style="background: #00ffff">Water</button>
+    <button id="enableClearBtn">Clear</button>
+    <button id="disableBtn">Disable Block Update</button>
+    <br>
+
+    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
+    <button id="randomize" class="btn btn-default" type="submit">Randomize</button>
+</div>
+
+<script>
+    const container = document.getElementById('container');
+    const totalRows = 50;
+    const totalCols = 50;
+    let enableSand = false;
+    let enableStone = false;
+    let enableWater = false;
+    let enableClear = false;
+
+
+    for (let row = 0; row < totalRows; row++) {
+        for (let col = 0; col < totalCols; col++) {
+            const block = document.createElement('div');
+            block.className = 'block';
+            block.setAttribute('data-row', row);
+            block.setAttribute('data-col', col);
+            block.addEventListener('mouseover', handleBlockClick);
+            container.appendChild(block);
+        }
+    }
+
+    document.getElementById('enableSandBtn').addEventListener('click', () => {
+        enableSand = true;
+        enableStone = false;
+        enableWater = false;
+        enableClear = false;
+    });
+
+    document.getElementById('enableStoneBtn').addEventListener('click', () => {
+        enableSand = false;
+        enableStone = true;
+        enableWater = false;
+        enableClear = false;
+    });
+
+    document.getElementById('enableWaterBtn').addEventListener('click', () => {
+        enableSand = false;
+        enableStone = false;
+        enableWater = true;
+        enableClear = false;
+    });
+    document.getElementById('enableClearBtn').addEventListener('click', () => {
+        enableSand = false;
+        enableStone = false;
+        enableWater = false;
+        enableClear = true;
+    });
+
+    document.getElementById('disableBtn').addEventListener('click', () => {
+        enableSand = false;
+        enableStone = false;
+        enableWater = false;
+    });
+
+
+</script>
+</body>
+</html>
